@@ -1,0 +1,28 @@
+{
+  "pdns": {
+    "server": "localhost"
+    , "api-key": "changeme"
+    , "url": ""
+  }
+  , "check": {
+    "interval": "1000" 
+  }
+  , "services" : [
+    { "name": "www.example.com"
+      , "port": 80
+      , "backends": [
+          {"probes": [{"type": "ip"}], "host": "127.0.0.1", "weight": 10}
+        , {"probes": [{"type": "ip"}], "host": "127.0.0.2", "weight": 10}
+        , {"probes": [{"type": "ip"}], "host": "127.0.0.3", "weight": 10}
+        ] 
+    }
+    , { "name": "api.example.com"
+      , "port": 8080
+      , "backends": [
+          {"probes": {"type": "http"}, "host": "127.0.0.1", "weight": 10}
+        , {"probes": {"type": "http"}, "host": "127.0.0.2", "weight": 10}
+        , {"probes": {"type": "http"}, "host": "127.0.0.3", "weight": 10}
+        ] 
+    }
+  ]
+}
