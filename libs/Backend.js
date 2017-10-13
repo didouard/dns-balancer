@@ -1,24 +1,31 @@
 var async             = require("async");
+var logger            = require("node-wrapper/logger");
 
 var Probe             = require("./Probe");
 
 var Backend = function (data) {
-  var self = this;
+  var self          = this;
+  var status        = "ready";
   
   this.host         = data.host;
   this.port         = data.port;
   this.weight       = data.weight;
   this.probes       = [];
+  this.log          = logger.create("Backend:"+self.host+":"+self.port);
   
-  for (var i = 0; i < data.probes; i++) {
+  this.log._debug("New backend");
+  
+  for (var i = 0; i < data.probes.length; i++) {
     var pdata = { host: self.host, port: self.port};
     
     for (var key in data.probes[i]) pdata[key] = data.probes[i][key];
     
-    self.probes.push = new Probe(pdata);
+    self.probes.push(new Probe(pdata));
   }
   
   this.check = function (data, callback) {
+    self.log._debug("check");
+    
     async.map(self.probes, function (probe, callback) {
       probe.check({}, callback);
     }, function (error, results) {
