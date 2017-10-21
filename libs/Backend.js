@@ -13,8 +13,9 @@ var Backend = function (data) {
   this.probes       = [];
   this.log          = logger.create("Backend:"+self.host+":"+self.port);
   
-  this.log._debug("New backend");
+  this.log._debug("Instanciate Backend");
   
+  // Create new probes
   for (var i = 0; i < data.probes.length; i++) {
     var pdata = { host: self.host, port: self.port};
     
@@ -33,7 +34,7 @@ var Backend = function (data) {
       
       var status = true;
   
-      for (var i = 0; i < results; i++) {
+      for (var i = 0; i < results.length; i++) {
         if (results[i] == false) status = false;
       }
       return callback(null, status);

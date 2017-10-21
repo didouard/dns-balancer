@@ -20,9 +20,9 @@ var Service = function (data) {
     for (var i = 0; i < self.backends.length; i++) {
       self.backends[i].port = self.port;
       
-      var data = self.backends[i];
-      data.port = self.port;
-      self.backends[i] = new Backend(data);
+      var bdata = self.backends[i];
+      bdata.port = self.port;
+      self.backends[i] = new Backend(bdata);
     }
     
     setInterval(function (data) {

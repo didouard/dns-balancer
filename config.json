@@ -11,10 +11,13 @@
     { "name": "www.example.com"
       , "port": 80
       , "backends": [
-          {"probes": [{"type": "ip"}], "host": "127.0.0.1", "weight": 10}
+          {"probes": [{"type": "ip"], "host": "127.0.0.1", "weight": 10}
         , {"probes": [{"type": "ip"}], "host": "192.168.42.42", "weight": 10}
         , {"probes": [{"type": "ip"}], "host": "127.0.0.3", "weight": 10}
         ] 
     }
+  ]
+  , "comment" : [
+        
   ]
 }

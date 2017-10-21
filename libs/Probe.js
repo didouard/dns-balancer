@@ -8,16 +8,17 @@ var Probe = function (data) {
   this.type         = data.type;
   this.host         = data.host;
   this.port         = data.port;
-  this.log          = logger.create("probe:"+self.host+":"+self.port);
+  this.log          = logger.create("probe:"+self.type+":"+self.host+":"+self.port);
   
-  this.log._debug("New probe");
+  this.log._debug("Instanciate probe");
 
   var checkIp = function (data, callback) {
-    self.log._debug("check IP"+self.host+":"+self.port);
-    ping.sys.probe(self.host, function(isAlive) {
+    self.log._debug("Check IP");
+    setTimeout(function() {
+      var isAlive = false;
       self.log._debug("Result : " + (isAlive) ? "OK" : "KO");  
       callback(null, isAlive);
-    });
+    }, 3000);
   };
   
   //TODO
@@ -25,7 +26,7 @@ var Probe = function (data) {
      
   };
   
-  switch (self.type) {
+  switch (this.type) {
       case "ip": 
         this.check = checkIp;
         break;
